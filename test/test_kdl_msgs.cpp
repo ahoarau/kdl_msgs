@@ -154,7 +154,7 @@ TEST(TestKdlMsgs, Wrench)
   TEST_MESSAGE(Wrench, KDL::Wrench, "4f539cf138b23283b520fd271b567936", true);
 
   // non-default constructors
-  kdl_msgs::Wrench c2(KDL::Vector(), KDL::Vector());
+  kdl_msgs::Wrench c22(KDL::Vector(), KDL::Vector());
 
   // operators
 }
