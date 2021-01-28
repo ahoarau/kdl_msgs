@@ -86,6 +86,18 @@ if(gencpp_VERSION VERSION_LESS "0.6.0" AND
   add_dependencies(${PROJECT_NAME}_generate_messages ${PROJECT_NAME}_rename_generated_header_files)
 endif()
 
+function(custom_header classname)
+  add_custom_command(TARGET ${PROJECT_NAME}_generate_messages_yamlcpp
+            POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/yaml/${classname}.h ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME}/yaml/${classname}.h
+            COMMENT "Copying custom ${classname}.h to ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME}/yaml/${classname}.h")
+  install(FILES include/${PROJECT_NAME}/yaml/${classname}.h DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}/yaml)
+endfunction()
+
+custom_header(Vector)
+custom_header(Twist)
+custom_header(JntArray)
+
 ## Language: Python
 # TODO
 

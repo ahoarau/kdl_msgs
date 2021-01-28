@@ -24,18 +24,18 @@ struct Twist_ : public ::KDL::Twist
   typedef Twist_<ContainerAllocator> Type;
 
   Twist_()
-    : linear(::KDL::Twist::vel), angular(::KDL::Twist::rot)
+    : vel(::KDL::Twist::vel), rot(::KDL::Twist::rot)
   {}
   Twist_(const ContainerAllocator&)
-    : linear(::KDL::Twist::vel), angular(::KDL::Twist::rot)
+    : vel(::KDL::Twist::vel), rot(::KDL::Twist::rot)
   {}
   Twist_(const ::KDL::Vector& vel, const ::KDL::Vector& rot)
     : ::KDL::Twist(vel, rot)
-    , linear(::KDL::Twist::vel), angular(::KDL::Twist::rot)
+    , vel(::KDL::Twist::vel), rot(::KDL::Twist::rot)
   {}
   Twist_(const ::KDL::Twist& other)
     : ::KDL::Twist(other)
-    , linear(::KDL::Twist::vel), angular(::KDL::Twist::rot)
+    , vel(::KDL::Twist::vel), rot(::KDL::Twist::rot)
   {}
 
   // assignment operator
@@ -50,10 +50,10 @@ struct Twist_ : public ::KDL::Twist
     return *this;
   }
 
-  typedef  ::kdl_msgs::Vector_<ContainerAllocator>  _linear_type;
-  ::KDL::Vector& linear; // reference to ::KDL::Twist::vel
-  typedef  ::kdl_msgs::Vector_<ContainerAllocator>  _angular_type;
-  ::KDL::Vector& angular; // reference to ::KDL::Twist::rot
+  typedef  ::kdl_msgs::Vector_<ContainerAllocator>  _vel_type;
+  ::KDL::Vector& vel; // reference to ::KDL::Twist::vel
+  typedef  ::kdl_msgs::Vector_<ContainerAllocator>  _rot_type;
+  ::KDL::Vector& rot; // reference to ::KDL::Twist::rot
 
   typedef boost::shared_ptr< ::kdl_msgs::Twist_<ContainerAllocator> > Ptr;
   typedef boost::shared_ptr< ::kdl_msgs::Twist_<ContainerAllocator> const> ConstPtr;
@@ -145,8 +145,8 @@ struct Definition< ::KDL::Twist >
     return "# Represents a KDL::Twist instance.\n\
 # This message is compatible to geometry_msgs/Twist.\n\
 \n\
-Vector linear\n\
-Vector angular\n\
+Vector vel\n\
+Vector rot\n\
 \n\
 ================================================================================\n\
 MSG: kdl_msgs/Vector\n\
@@ -194,10 +194,10 @@ struct Printer< ::KDL::Twist >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::KDL::Twist& v)
   {
-    s << indent << "linear: ";
+    s << indent << "vel: ";
     s << std::endl;
     Printer< ::KDL::Vector >::stream(s, indent + "  ", v.vel);
-    s << indent << "angular: ";
+    s << indent << "rot: ";
     s << std::endl;
     Printer< ::KDL::Vector >::stream(s, indent + "  ", v.rot);
   }
